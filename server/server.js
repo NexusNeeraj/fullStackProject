@@ -2,10 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 
-import authRoutes from "./routes/post.js";
-import postRoutes from "./routes/auth.js";
+import authRoutes from "./routes/post";
+import postRoutes from "./routes/auth";
 
-import { connectDB } from "./config/db.js";
+import { connectDB } from "./config/db";
 
 dotenv.config();
 

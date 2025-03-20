@@ -1,13 +1,33 @@
-import React from 'react'
-import Auth from "../src/pages/Auth"
-import CreatePost from './components/CreatePost'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import Layout from './components/Layout';
+import Auth from './pages/Auth';
+import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {
+const App = () => {
+  const navigate = useNavigate();
+
+  const handleLoginSuccess = () => {
+    navigate('/');
+  };
+
   return (
-    <div>
-      <CreatePost />
-    </div>
-  )
-}
+    <Routes>
+        <Route path="/" element={
+            <ProtectedRoute>
+                <Layout />
+            </ProtectedRoute>
+        } />
+        <Route path="/auth" element={<Auth onLoginSuccess={handleLoginSuccess} />} />
+    </Routes>
+);
+};
 
-export default App
+const AppWrapper = () => (
+  <Router>
+      <App />
+  </Router>
+);
+
+
+export default AppWrapper;

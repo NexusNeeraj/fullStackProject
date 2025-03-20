@@ -10,7 +10,7 @@ const CreatePost = ({ onPostCreated }) => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            const { data } = await API.post('/create', { title, author, content }, {
+            const { data } = await API.post('/post/create', { title, author, content }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert('Post created successfully!');

@@ -3,10 +3,10 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-import authRoutes from "./routes/post";
-import postRoutes from "./routes/auth";
+const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/post");
 
-import { connectDB } from "./config/db";
+const { connectDB } = require("./config/db");
 
 dotenv.config();
 
@@ -16,8 +16,9 @@ app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(cors());
 
-app.use("/api/v1", authRoutes);
-app.use("/api/v1", postRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/post", postRoutes);
+
 
 app.listen(PORT, () => {
 	console.log("Server is running on http://localhost:" + PORT);

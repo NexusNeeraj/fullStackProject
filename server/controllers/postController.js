@@ -1,6 +1,6 @@
 const Post = require("../models/Post");
 
-export const getAllPosts = async (req, res) => {
+exports.getAllPosts = async (req, res) => {
     try {
         const posts = await Post.find().populate('author', 'username email');
         res.status(200).json(posts);
@@ -9,7 +9,7 @@ export const getAllPosts = async (req, res) => {
     }
 };
 
-export const createPost = async (req, res) => {
+exports.createPost = async (req, res) => {
     const { title, content } = req.body;
 
     if (!title || !content) {
@@ -29,7 +29,7 @@ export const createPost = async (req, res) => {
     }
 };
 
-export const updatePost = async (req, res) => {
+exports.updatePost = async (req, res) => {
     const { title, content } = req.body;
 
     try {
@@ -54,7 +54,7 @@ export const updatePost = async (req, res) => {
     }
 };
 
-export const deletePost = async (req, res) => {
+exports.deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 

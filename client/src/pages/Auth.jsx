@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import API from '../utils/api';
 
-const Auth = () => {
+const Auth = ({ onLoginSuccess }) => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -16,10 +16,11 @@ const Auth = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const endpoint = isSignup ? '/signup' : '/login';
+            const endpoint = isSignup ? '/auth/signup' : '/auth/login';
             const { data } = await API.post(endpoint, formData);
-
+            console.log(data);
             localStorage.setItem('token', data.token);
+            onLoginSuccess();
             alert(`Successfully ${isSignup ? 'signed up' : 'logged in'}!`);
         } catch (error) {
             alert(error.response?.data?.error || 'An error occurred.');

@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -9,9 +8,8 @@ const generateToken = (user) => {
     });
 };
 
-export const signup = async (req, res) => {
+exports.signup = async (req, res) => {
     const { username, email, password } = req.body;
-
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -29,7 +27,7 @@ export const signup = async (req, res) => {
     }
 };
 
-export const login = async (req, res) => {
+exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
